@@ -32,13 +32,13 @@ public class Movement : MonoBehaviour
     private bool isGrounded;
     private bool isRunning;
 
-    private Animator animatorzxc;
+    //private Animator animatorzxc;
     
     Rigidbody2D rb;
 
     void Start()
     {
-        animatorzxc = gameObject.GetComponent<Animator>();
+        //animatorzxc = gameObject.GetComponent<Animator>();
     }
 
     void Awake()
@@ -52,7 +52,7 @@ public class Movement : MonoBehaviour
         if (CanMove() == false)
         {
             horizontalValue = 0f;
-            animatorzxc.SetBool("isWalking", false);
+            //animatorzxc.SetBool("isWalking", false);
             return;
         }
         else if (CanMove() == true)
@@ -74,7 +74,7 @@ public class Movement : MonoBehaviour
             //Walk
             if (horizontalValue != 0 && !Input.GetKey(KeyCode.LeftShift))
             {
-                animatorzxc.SetBool("isWalking", true);
+                //animatorzxc.SetBool("isWalking", true);
                 Walk();
                 isRunning = false;
             }
@@ -85,7 +85,7 @@ public class Movement : MonoBehaviour
                 runningSpeed = speed * 2f;
                 Sprint();
                 //animatorzxc.SetBool("isRunning", true);
-                animatorzxc.SetBool("isWalking", false);
+                //animatorzxc.SetBool("isWalking", false);
             }
 
 

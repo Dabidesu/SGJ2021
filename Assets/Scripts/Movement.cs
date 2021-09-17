@@ -16,12 +16,18 @@ public class Movement : MonoBehaviour
     public float jumpMultiplier;
 
     public bool facingRight = true;
+
+    [SerializeField] public Transform wallCheck;
     
+
+    private bool canGrab, isGrabbing;
+
+}
 
     public Transform groundCheck;
     public LayerMask groundLayer;
 
-
+    
     private BoxCollider2D boxCollider2d;
 
     //Non-Serialized Variables
@@ -91,6 +97,25 @@ public class Movement : MonoBehaviour
 
         }
 
+        //Wall Jump
+        canGrab = Physics2D.OverlapCircle(wallCheck.position, 0.2f, groundLayer);
+
+        isGrabbing == false;
+
+        if(canGrab && !isGrounded)
+        {
+            if((transform.localScale.x == 1f && Input.SetAxisRaw("Horizontal") > 0) || (transform.localScale.x == -1f && Input.SetAxisRaw("Horizontal") < 0))
+            {
+                isGrabbing == true;
+            }
+            
+        }
+
+
+        if(isGrabbing)
+        {
+            rb.gravityScale = 0f;
+        }
     }
 
 

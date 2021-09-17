@@ -61,7 +61,7 @@ public class Movement : MonoBehaviour
 
                 //Jump
                 jumpMultiplier = 2.0f;
-                jumpForce = 5f * jumpMultiplier;
+                jumpForce = 10f * jumpMultiplier;
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     if (GameObject.Find("Player").GetComponent<GroundChecker>().isGrounded)
@@ -177,7 +177,7 @@ public class Movement : MonoBehaviour
             isGrabbing = true;
             if(isGrabbing)
             {
-                rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, jumpForce);
+                rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed , jumpForce);
                 //Revenant Climb
                 if(isGrabbing)
                     rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, jumpForce);

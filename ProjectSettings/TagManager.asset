@@ -8,6 +8,7 @@ TagManager:
   - Projectile
   - Spawner
   - StaffGem
+  - Enemy
   layers:
   - Default
   - TransparentFX

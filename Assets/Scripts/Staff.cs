@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 
 public class Staff : Weapon, IRangedWeapon, IMagicWeapon
 {   
@@ -37,12 +36,8 @@ public class Staff : Weapon, IRangedWeapon, IMagicWeapon
             Vector3 forceVector3d = targetPosition - userPosition;
             Vector2 forceVector2d = new Vector2(forceVector3d.x, forceVector3d.y);
 
-            
-            GameObject proj = PhotonNetwork.Instantiate(ProjectilePrefab.name, GemPrefab.GetComponent<Transform>().position, Quaternion.identity);
-            // GameObject proj = Instantiate(ProjectilePrefab, GemPrefab.GetComponent<Transform>().position + Vector3.right * firingOffset, Quaternion.identity);
-            // proj.GetComponent<Fireball>().userTransform = transform;
+            GameObject proj = Instantiate(ProjectilePrefab, GemPrefab.GetComponent<Transform>().position, Quaternion.identity);
             proj.GetComponent<Fireball>().damage = Damage;
-            proj.GetComponent<Fireball>().User = user;
             proj.GetComponent<SpriteRenderer>().color = rankColor;
             proj.GetComponent<Rigidbody2D>().velocity = forceVector2d.normalized * ProjectileSpeed;
 

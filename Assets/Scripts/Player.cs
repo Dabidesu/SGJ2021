@@ -26,8 +26,9 @@ public class Player : MonoBehaviourPun, IDamagable<float>
     public float Health {
         get {return health;}
         set {
-            if (value < 0) {
+            if (value <= 0) {
                 health = 0;
+                isAlive = false;
             } else if (value > 100) {
                 health = 100;
             } else {
@@ -88,6 +89,9 @@ public class Player : MonoBehaviourPun, IDamagable<float>
             cursor.GetComponent<PlayerCursor>().player = this;
             cursor.GetComponent<PlayerCursor>().camera = camera.GetComponent<Camera>();
         }
+        if (!view.IsMine) {
+            GameObject.Destroy(camera);
+        }
     }
 
     void Update()
@@ -105,8 +109,10 @@ public class Player : MonoBehaviourPun, IDamagable<float>
 
             }
         }
-        RegenerateResources();
-        UpdateStatusBars();
+        if (isAlive) {
+            RegenerateResources();
+            UpdateStatusBars();
+        }
     }
 
     void UpdateStatusBars() {
@@ -125,6 +131,7 @@ public class Player : MonoBehaviourPun, IDamagable<float>
             weapon.GetComponent<Collider2D>().enabled = false;
             weapon.GetComponent<Rigidbody2D>().isKinematic = true;
             weapon.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            weapon.GetComponent<Weapon>().UserID = view.ViewID;
         }
     }
 
@@ -149,7 +156,13 @@ public class Player : MonoBehaviourPun, IDamagable<float>
     }
 
     [PunRPC]
-    void takeDamage (float damageAmount) {
-        Health -= damageAmount;
+    void takeDamage (float damageAmount, int SourceID) {
+        if (view.IsMine) {
+            Health -= damageAmount;
+            print($"damaged by: {SourceID} ({damageAmount})");
+            if (!isAlive) {
+                print($"Killed by: {SourceID}");
+            }
+        }
     }
 }

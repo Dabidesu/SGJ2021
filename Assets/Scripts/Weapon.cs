@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
+    public int UserID;
     protected Color rankColor;
     protected float baseDamage;
     protected float damage;

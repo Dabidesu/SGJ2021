@@ -66,7 +66,6 @@ public class Movement : MonoBehaviour
             horizontalValue = Input.GetAxisRaw("Horizontal");
             anim.SetBool("isWalking", false);
             anim.SetBool("isRunning", false);
-
             //Jump
             jumpMultiplier = 2.0f;
             jumpForce = 10f * jumpMultiplier;
@@ -83,49 +82,33 @@ public class Movement : MonoBehaviour
             {
                 if (!gameObject.GetComponent<GroundChecker>().isGrounded)
                 {
-                    anim.SetBool("isWalking", true);
-                    if (!gameObject.GetComponent<GroundChecker>().isGrounded)
-                    {
-                        //Debug.Log("xd");
-                    }
-                    else
-                    {
-                        Walk();
-                    }
-                    isRunning = false;
+                    anim.SetBool("isWalking", false);
                 }
                 else
                 {
-                    if (!gameObject.GetComponent<GroundChecker>().isGrounded)
-                    {
-                        //Debug.Log("xd");
-                    }
-                    else
-                    {
-                        runningSpeed = speed * 2f;
-                        Sprint();
-                        anim.SetBool("isRunning", true);
-                        anim.SetBool("isWalking", false);
-                    }
-
+                    Walk();
+                    anim.SetBool("isWalking", true);
                 }
+                
                 isRunning = false;
             }
             //Sprint
-            else
+            else if(horizontalValue != 0 && Input.GetKey(KeyCode.LeftShift))
             {
+                
                 if (!gameObject.GetComponent<GroundChecker>().isGrounded)
                 {
-                    //Debug.Log("xd");
+
+
                 }
-                else
+                else if(gameObject.GetComponent<GroundChecker>().isGrounded)
                 {
+                    anim.SetBool("isRunning", true);
                     runningSpeed = speed * 2f;
                     Sprint();
-                    anim.SetBool("isRunning", true);
-                    anim.SetBool("isWalking", false);
+                    
+                    
                 }
-
             }
 
             WallCheck();
@@ -185,7 +168,6 @@ public class Movement : MonoBehaviour
     void Sprint()
     {
         isRunning = true;
-        //animatorzxc.SetBool("isFastasFuckBoi", true);
         rb.velocity = new Vector2(horizontalValue * runningSpeed, rb.velocity.y);
     }
 
@@ -198,7 +180,7 @@ public class Movement : MonoBehaviour
     {
         if (Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, wallLayer) && Mathf.Abs(horizontalValue) > 0 && /*rb.velocity.y < 0 &&*/ !gameObject.GetComponent<GroundChecker>().isGrounded)
         {
-            Debug.Log(isGrabbing);
+            //Debug.Log(isGrabbing);
             Vector2 v = rb.velocity;
             v.y = -slideFactor;
             rb.velocity = v;
@@ -209,6 +191,8 @@ public class Movement : MonoBehaviour
                 //Revenant Climb
                 if (isGrabbing)
                     rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, jumpForce);
+
+                //Climb Animation
             }
         }
         else

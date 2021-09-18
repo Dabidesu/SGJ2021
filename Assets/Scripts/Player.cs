@@ -73,16 +73,16 @@ public class Player : MonoBehaviour, IDamagable<float>
     // public GameObject StaminaBar;
     public GameObject WallChecker;
     public GameObject CameraPrefab;
-    GameObject camera;
 
     void Start()
-    {
+    {   
         cursor = GameObject.Instantiate(PlayerCursorPrefab, Vector3.zero, Quaternion.identity);
-        camera.transform.SetParent(this.gameObject.transform);
-        camera.GetComponent<CameraFollow>().target = transform;
-        camera.GetComponent<CameraFollow>().Follow();
         cursor.GetComponent<PlayerCursor>().player = this;
-        cursor.GetComponent<PlayerCursor>().camera = camera.GetComponent<Camera>();
+        // camera.transform.SetParent(this.gameObject.transform);
+        // camera.GetComponent<CameraFollow>().target = transform;
+        // camera.GetComponent<CameraFollow>().Follow();
+        // cursor.GetComponent<PlayerCursor>().player = this;
+        // cursor.GetComponent<PlayerCursor>().camera = Camera.main;
     }
 
     void Update()

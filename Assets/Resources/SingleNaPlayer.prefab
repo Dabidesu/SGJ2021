@@ -2149,6 +2149,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 8979947162234527757}
+    - target: {fileID: 1730046361898471723, guid: 231db844a1a2d244a87ef8b10f04432a, type: 3}
+      propertyPath: smoothFactor
+      value: 3.84
+      objectReference: {fileID: 0}
     - target: {fileID: 5896756407950414334, guid: 231db844a1a2d244a87ef8b10f04432a, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -2191,6 +2195,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5896756407950414334, guid: 231db844a1a2d244a87ef8b10f04432a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304917658669172219, guid: 231db844a1a2d244a87ef8b10f04432a, type: 3}
+      propertyPath: orthographic size
+      value: 10.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304917658669172219, guid: 231db844a1a2d244a87ef8b10f04432a, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304917658669172219, guid: 231db844a1a2d244a87ef8b10f04432a, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304917658669172219, guid: 231db844a1a2d244a87ef8b10f04432a, type: 3}
+      propertyPath: m_BackGroundColor.r
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8485826231100676593, guid: 231db844a1a2d244a87ef8b10f04432a, type: 3}

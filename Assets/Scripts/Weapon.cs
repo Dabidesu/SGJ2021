@@ -28,7 +28,7 @@ public abstract class Weapon : MonoBehaviour
         }
     }
 
-    protected void setRankColor(int rank) {
+    public void setRankColor(int rank) {
         switch (rank) {
             case 1:
                 rankColor = Color.white;

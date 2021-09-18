@@ -3,9 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Projectile
-  - Weapon
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -45,4 +43,7 @@ TagManager:
     locked: 0
   - name: Platform
     uniqueID: 171992553
+    locked: 0
+  - name: Player
+    uniqueID: 1495168101
     locked: 0

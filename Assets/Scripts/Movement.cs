@@ -41,7 +41,8 @@ public class Movement : MonoBehaviour
     
 
 
-    //private Animator animatorzxc;
+    //Animator Component
+    private Animator anim;
 
     Rigidbody2D rb;
 
@@ -81,18 +82,38 @@ public class Movement : MonoBehaviour
                 //animatorzxc.SetBool("isWalking", true);
                 if (!(GameObject.Find("Player").GetComponent<GroundChecker>().isGrounded))
                 {
-                    //Debug.Log("xd");
+                    anim.SetBool("isWalking", true);
+                    if (!gameObject.GetComponent<GroundChecker>().isGrounded)
+            {
+                        //Debug.Log("xd");
+                    }
+                    else
+                    {
+                        Walk();
+                    }
+                    isRunning = false;
                 }
                 else
                 {
-                    Walk();
+                    if(!gameObject.GetComponent<GroundChecker>().isGrounded)
+                    {
+                        //Debug.Log("xd");
+                    }
+                    else
+                    {
+                        runningSpeed = speed * 2f;
+                        Sprint();
+                        anim.SetBool("isRunning", true);
+                        anim.SetBool("isWalking", false);
+                    }
+
                 }
                 isRunning = false;
             }
             //Sprint
             else
             {
-                if(!(GameObject.Find("Player").GetComponent<GroundChecker>().isGrounded))
+                if(!gameObject.GetComponent<GroundChecker>().isGrounded)
                 {
                     //Debug.Log("xd");
                 }
@@ -112,7 +133,7 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!(GameObject.Find("Player").GetComponent<GroundChecker>().isGrounded))
+        if (!gameObject.GetComponent<GroundChecker>().isGrounded)
         {
             //Debug.Log("xd");
         }
@@ -174,7 +195,7 @@ public class Movement : MonoBehaviour
 
     void WallCheck()
     {
-        if(Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, wallLayer) && Mathf.Abs(horizontalValue) > 0 && /*rb.velocity.y < 0 &&*/ !(GameObject.Find("Player").GetComponent<GroundChecker>().isGrounded))
+        if(Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, wallLayer) && Mathf.Abs(horizontalValue) > 0 && /*rb.velocity.y < 0 &&*/ !gameObject.GetComponent<GroundChecker>().isGrounded)
         {
             Debug.Log(isGrabbing);
             Vector2 v = rb.velocity;

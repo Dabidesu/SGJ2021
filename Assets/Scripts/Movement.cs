@@ -269,6 +269,7 @@ public class Movement : MonoBehaviour
         anim.SetBool("isMidAir", false);
         yield return new WaitForSeconds(3f);
         dashCounter -= dashCounter;
+        hint.SetActive(false);
     }
 }
 

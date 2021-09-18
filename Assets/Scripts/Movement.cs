@@ -144,7 +144,6 @@ public class Movement : MonoBehaviour
                 if(dashCounter > 0)
                 {
                     rb.velocity = transform.right * dashDirection * dashForce;
-
                     currDashTimer -= Time.deltaTime;
                     Debug.Log(dashCounter);
                     dashCounter--;

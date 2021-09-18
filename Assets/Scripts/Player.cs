@@ -124,7 +124,10 @@ public class Player : MonoBehaviourPun, IDamagable<float>
     void OnCollisionEnter2D(Collision2D col) {
 
         // Weapon pickup
-        if ( weapon == null && col.gameObject.tag == "Weapon") {
+        if ( weapon == null && (col.gameObject.tag == "Weapon" || col.gameObject.tag == "NewWeapon")) {
+            if (col.gameObject.CompareTag("NewWeapon")) {
+                col.gameObject.tag = "Weapon";
+            }
             weapon = col.gameObject;
             weapon.transform.position = RightHandPrefab.transform.position + Vector3.back;
             weapon.transform.SetParent(RightHandPrefab.transform);

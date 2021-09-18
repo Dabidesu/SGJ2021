@@ -14,7 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Combi.unity
     guid: 5a04a06c6e716e14fbd764b64e458a2b
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/Arena.unity
-    guid: 64eeee7001da8cd4380678f0c848a66b
+    path: Assets/Scenes/Arena Test.unity
+    guid: 98187eaf13964e74b982deb037ed360f
   m_configObjects: {}

@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24381958d0a49284bb49d24863c35085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UserID: 0
   rank: 1
   ProjectilePrefab: {fileID: 5735537670753129386, guid: 3593e9f182492614aae1dd7d0d634557, type: 3}
   GemPrefab: {fileID: 9115987285569591333}

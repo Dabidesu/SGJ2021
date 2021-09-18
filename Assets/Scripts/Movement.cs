@@ -13,8 +13,13 @@ public class Movement : MonoBehaviour
     public float speed;
     public float runningSpeed;
     public float jumpForce;
+    public float dashForce;
     public float jumpMultiplier;
     public float wallJumpTime = 0.2f;
+
+    public float startDashTimer;
+    public float dashCooldown = 3f;
+
 
     public bool facingRight = true;
 
@@ -34,13 +39,21 @@ public class Movement : MonoBehaviour
     private float moveInput;
     private float horizontalValue;
     private float xVal;
+    private float currDashTimer;
+    private float dashDirection;
+
+    private int dashCounter = 3;
+    private int testCount = 3;
 
     private bool isGrounded;
     private bool isRunning;
     private bool isGrabbing;
+    private bool isDashing;
+    private bool canDash;
+    private bool onCoolDown;
 
 
-
+    
     //Animator Component
     private Animator anim;
 
@@ -80,6 +93,7 @@ public class Movement : MonoBehaviour
             //Walk
             if (horizontalValue != 0 && !Input.GetKey(KeyCode.LeftShift))
             {
+                //Debug.Log(horizontalValue);
                 if (!gameObject.GetComponent<GroundChecker>().isGrounded)
                 {
                     anim.SetBool("isWalking", false);
@@ -111,7 +125,51 @@ public class Movement : MonoBehaviour
                 }
             }
 
+            //Wall Climb
             WallCheck();
+            
+            //Dash
+            if(Input.GetKeyDown(KeyCode.LeftShift) && !isGrounded && horizontalValue != 0)
+            {
+                isDashing = true;
+                currDashTimer = startDashTimer;
+                rb.velocity = Vector2.zero;
+                dashDirection = (int)horizontalValue;
+                
+            }
+            
+            if(isDashing)
+            {
+                
+                if(dashCounter > 0)
+                {
+                    rb.velocity = transform.right * dashDirection * dashForce;
+
+                    currDashTimer -= Time.deltaTime;
+                    Debug.Log(dashCounter);
+                    dashCounter--;
+                    
+                    if (currDashTimer <= 0)
+                    {
+                        isDashing = false;
+
+                    }
+
+                    if(dashCounter == 0)
+                    {
+                        canDash = false;
+                    }
+                }
+                else if(!canDash)
+                {
+                    CoolDownStart();
+                    canDash = true;
+                }
+                
+                
+
+            }
+
         }
     }
 
@@ -199,15 +257,29 @@ public class Movement : MonoBehaviour
 
                 }
 
-
-
-
             }
         }
         else
         {
             anim.SetBool("isClimbing", false);
         }
+    }
+
+    void CoolDownStart()
+    {
+        StartCoroutine(CooldownCoroutine());
+    }
+    IEnumerator CooldownCoroutine()
+    {
+        onCoolDown = true;
+        //Debug.Log(dashCooldown);
+        yield return new WaitForSeconds(dashCooldown);
+        onCoolDown = false;
+    }
+
+    public void decCounter()
+    {
+        dashCounter--;
     }
 }
 

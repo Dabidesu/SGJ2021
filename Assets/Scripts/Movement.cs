@@ -157,6 +157,7 @@ public class Movement : MonoBehaviour
                     hint.SetActive(true);
                     anim.SetBool("isStoppedMidAir", true);
                     StartCoroutine(DashCoolDown());
+                    isDashing = false;
                 }
                 //Debug.Log("Cooldown finished.");
                 //hint.SetActive(false);

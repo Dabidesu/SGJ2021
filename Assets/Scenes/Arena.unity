@@ -6054,6 +6054,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3829914490363288473, guid: 86d6e98b4dc019f4eb4faae69b075d9c, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8666839319271118088, guid: 86d6e98b4dc019f4eb4faae69b075d9c, type: 3}
       propertyPath: examineText
       value: 

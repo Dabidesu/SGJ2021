@@ -64,14 +64,15 @@ public class Movement : MonoBehaviour
         if (view.IsMine)
         {
             horizontalValue = Input.GetAxisRaw("Horizontal");
-            //animatorzxc.SetBool("isWalking", false);
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isRunning", false);
 
             //Jump
             jumpMultiplier = 2.0f;
             jumpForce = 10f * jumpMultiplier;
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (GameObject.Find("Player").GetComponent<GroundChecker>().isGrounded)
+                if (gameObject.GetComponent<GroundChecker>().isGrounded)
                 {
                     Jump();
                 }
@@ -80,9 +81,7 @@ public class Movement : MonoBehaviour
             //Walk
             if (horizontalValue != 0 && !Input.GetKey(KeyCode.LeftShift))
             {
-                anim.SetBool("isWalking", true);
-                anim.SetBool("isRunning", true);
-                if (!(GameObject.Find("Player").GetComponent<GroundChecker>().isGrounded))
+                if (!gameObject.GetComponent<GroundChecker>().isGrounded)
                 {
                     anim.SetBool("isWalking", true);
                     if (!gameObject.GetComponent<GroundChecker>().isGrounded)

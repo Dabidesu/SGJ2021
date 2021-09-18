@@ -48,7 +48,7 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
-        //animatorzxc = gameObject.GetComponent<Animator>();
+        anim = gameObject.GetComponent<Animator>();
         view = GetComponent<PhotonView>();
     }
 
@@ -80,7 +80,8 @@ public class Movement : MonoBehaviour
             //Walk
             if (horizontalValue != 0 && !Input.GetKey(KeyCode.LeftShift))
             {
-                //animatorzxc.SetBool("isWalking", true);
+                anim.SetBool("isWalking", true);
+                anim.SetBool("isRunning", true);
                 if (!(GameObject.Find("Player").GetComponent<GroundChecker>().isGrounded))
                 {
                     anim.SetBool("isWalking", true);
@@ -104,7 +105,7 @@ public class Movement : MonoBehaviour
                     {
                         runningSpeed = speed * 2f;
                         Sprint();
-                        //anim.SetBool("isRunning", true);
+                        anim.SetBool("isRunning", true);
                         anim.SetBool("isWalking", false);
                     }
 
@@ -122,8 +123,8 @@ public class Movement : MonoBehaviour
                 {
                     runningSpeed = speed * 2f;
                     Sprint();
-                    //animatorzxc.SetBool("isRunning", true);
-                    //animatorzxc.SetBool("isWalking", false);
+                    anim.SetBool("isRunning", true);
+                    anim.SetBool("isWalking", false);
                 }
 
             }

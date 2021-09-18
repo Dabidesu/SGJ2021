@@ -7,6 +7,7 @@ public abstract class Weapon : MonoBehaviour
     protected Color rankColor;
     protected float baseDamage;
     protected float damage;
+    public GameObject GemPrefab;
     public float BaseDamage {
         get {return baseDamage;}
     }
@@ -45,7 +46,7 @@ public abstract class Weapon : MonoBehaviour
             default:
                 throw new System.Exception("unavailable rarity");
         }
-        this.GetComponent<SpriteRenderer>().color = rankColor;
+        GemPrefab.gameObject.GetComponent<SpriteRenderer>().color = rankColor;
     }
 
 }

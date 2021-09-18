@@ -57,7 +57,7 @@ public class Staff : Weapon, IRangedWeapon, IMagicWeapon
     IEnumerator DropWeapon (float secs, GameObject weapon) {
         yield return new WaitForSecondsRealtime(secs);
         weapon.GetComponent<Collider2D>().enabled = true;
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(5f);
         weapon.GetComponent<Rigidbody2D>().isKinematic = false;
     }
 }

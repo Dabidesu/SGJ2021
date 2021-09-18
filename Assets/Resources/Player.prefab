@@ -800,7 +800,6 @@ GameObject:
   - component: {fileID: 8666839319271118089}
   - component: {fileID: 3518362819235420411}
   - component: {fileID: 6837456766160910522}
-  - component: {fileID: 8623181997261423574}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -817,7 +816,7 @@ Transform:
   m_GameObject: {fileID: 8666839319271118129}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.9, y: 1.32, z: 0}
-  m_LocalScale: {x: 1.7653348, y: 1.8155587, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8666839319477033716}
   - {fileID: 8666839320096903685}
@@ -977,7 +976,6 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 8666839319271118089}
   - {fileID: 6837456766160910522}
-  - {fileID: 8623181997261423574}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -995,7 +993,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
+  m_SynchronizeScale: 1
   m_UseLocal: 1
 --- !u!114 &3518362819235420411
 MonoBehaviour:
@@ -1042,30 +1040,6 @@ MonoBehaviour:
     Name: isWalking
   - Type: 4
     SynchronizeType: 0
-    Name: isRunning
-  m_SynchronizeLayers:
-  - SynchronizeType: 0
-    LayerIndex: 0
---- !u!114 &8623181997261423574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8666839319271118129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 4
-    SynchronizeType: 1
-    Name: isWalking
-  - Type: 4
-    SynchronizeType: 1
     Name: isRunning
   m_SynchronizeLayers:
   - SynchronizeType: 0

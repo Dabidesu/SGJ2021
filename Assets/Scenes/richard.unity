@@ -1257,21 +1257,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6527694439519102635, guid: 36fcb5987073d0e47a1ed72ebef6adb1, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6527694439519102638, guid: 36fcb5987073d0e47a1ed72ebef6adb1, type: 3}
       propertyPath: m_Name
       value: Staff (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6527694439519102638, guid: 36fcb5987073d0e47a1ed72ebef6adb1, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6527694439519102639, guid: 36fcb5987073d0e47a1ed72ebef6adb1, type: 3}
-      propertyPath: rank
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36fcb5987073d0e47a1ed72ebef6adb1, type: 3}

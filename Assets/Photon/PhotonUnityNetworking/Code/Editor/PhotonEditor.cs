@@ -188,9 +188,13 @@ namespace Photon.Pun
             EditorApplication.playModeStateChanged -= PlayModeStateChanged;
             EditorApplication.playModeStateChanged += PlayModeStateChanged;
 
+            #if UNITY_2021_1_OR_NEWER
+            CompilationPipeline.compilationStarted -= OnCompileStarted21;
+            CompilationPipeline.compilationStarted += OnCompileStarted21;
+            #else
             CompilationPipeline.assemblyCompilationStarted -= OnCompileStarted;
             CompilationPipeline.assemblyCompilationStarted += OnCompileStarted;
-
+            #endif
 
             #if (UNITY_2018 || UNITY_2018_1_OR_NEWER)
             EditorApplication.projectChanged -= OnProjectChanged;
@@ -245,6 +249,14 @@ namespace Photon.Pun
             }
         }
 
+
+        #if UNITY_2021_1_OR_NEWER
+        private static void OnCompileStarted21(object obj)
+        {
+            OnCompileStarted(obj as string);
+        }
+        #endif
+
         private static void OnCompileStarted(string obj)
         {
             if (PhotonNetwork.IsConnected)
@@ -263,6 +275,7 @@ namespace Photon.Pun
                 #endif
             }
         }
+
 
         [DidReloadScripts]
         private static void OnDidReloadScripts()

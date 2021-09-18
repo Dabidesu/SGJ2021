@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
-    public int UserID;
     protected Color rankColor;
     protected float baseDamage;
     protected float damage;
@@ -29,7 +28,7 @@ public abstract class Weapon : MonoBehaviour
         }
     }
 
-    public void setRankColor(int rank) {
+    protected void setRankColor(int rank) {
         switch (rank) {
             case 1:
                 rankColor = Color.white;

@@ -6,15 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class ConnectToServer : MonoBehaviourPunCallbacks
 {
-    public static ConnectToServer instance;
-    void Awake () {
-        if (instance != null && instance == this) {
-            gameObject.SetActive(false);
-        } else {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-    }
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();

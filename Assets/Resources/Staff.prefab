@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 6527694439519102639}
   - component: {fileID: 6527694439519102635}
   - component: {fileID: 6527694439519102634}
-  - component: {fileID: -4375473061936821040}
+  - component: {fileID: -5122882655919358681}
   - component: {fileID: 1424602852315108328}
   m_Layer: 9
   m_Name: Staff
@@ -80,8 +80,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24381958d0a49284bb49d24863c35085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UserID: 0
   rank: 1
+  firingOffset: 0.1
   ProjectilePrefab: {fileID: 5735537670753129386, guid: 3593e9f182492614aae1dd7d0d634557, type: 3}
   GemPrefab: {fileID: 9115987285569591333}
 --- !u!61 &6527694439519102635
@@ -131,7 +131,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &-4375473061936821040
+--- !u!114 &-5122882655919358681
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,7 +179,7 @@ MonoBehaviour:
     ExtrapolateNumberOfStoredPositions: 1
   m_RotationModel:
     SynchronizeEnabled: 1
-    InterpolateOption: 2
+    InterpolateOption: 1
     InterpolateRotateTowardsSpeed: 180
     InterpolateLerpSpeed: 5
   m_ScaleModel:

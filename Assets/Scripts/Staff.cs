@@ -5,6 +5,7 @@ using Photon.Pun;
 
 public class Staff : Weapon, IRangedWeapon, IMagicWeapon
 {   
+    [SerializeField] float firingOffset = 0.1f;
     Color staffColor;
     Color fireballColor;
     public GameObject ProjectilePrefab;
@@ -33,7 +34,7 @@ public class Staff : Weapon, IRangedWeapon, IMagicWeapon
         SetGemColor(Rank);
 
         if (user.Mana >= ManaCost) {
-            Vector3 forceVector3d = targetPosition - GemPrefab.GetComponent<Transform>().position;
+            Vector3 forceVector3d = targetPosition - userPosition;
             Vector2 forceVector2d = new Vector2(forceVector3d.x, forceVector3d.y);
 
             
@@ -41,7 +42,7 @@ public class Staff : Weapon, IRangedWeapon, IMagicWeapon
             // GameObject proj = Instantiate(ProjectilePrefab, GemPrefab.GetComponent<Transform>().position + Vector3.right * firingOffset, Quaternion.identity);
             // proj.GetComponent<Fireball>().userTransform = transform;
             proj.GetComponent<Fireball>().damage = Damage;
-            proj.GetComponent<Fireball>().SourceID = UserID;
+            proj.GetComponent<Fireball>().User = user;
             proj.GetComponent<SpriteRenderer>().color = rankColor;
             proj.GetComponent<Rigidbody2D>().velocity = forceVector2d.normalized * ProjectileSpeed;
 

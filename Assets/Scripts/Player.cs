@@ -5,6 +5,7 @@ using Photon.Pun;
 
 public class Player : MonoBehaviour, IDamagable<float>
 {
+    PhotonView view;
     bool isAlive = true;
     [SerializeReference] float health = 100;
     [SerializeField] float mana = 100;
@@ -17,7 +18,9 @@ public class Player : MonoBehaviour, IDamagable<float>
     GameObject weapon = null;
     public GameObject Weapon {
         get{return weapon;}
+        set{weapon = value;}
     }
+    public GameObject RightHandPrefab;
     public GameObject PlayerCursorPrefab;
     public float Health {
         get {return health;}
@@ -65,27 +68,64 @@ public class Player : MonoBehaviour, IDamagable<float>
         get {return staminaRegen;}
     }
 
+    public GameObject HealthBar;
+    public GameObject ManaBar;
+    public GameObject StaminaBar;
+    public GameObject WallChecker;
+    public GameObject CameraPrefab;
+    GameObject camera;
+
     void Start()
     {
-        cursor = GameObject.Instantiate(PlayerCursorPrefab, Vector3.zero, Quaternion.identity);
-        cursor.GetComponent<PlayerCursor>().player = this;
+        view = GetComponent<PhotonView>();
+        if (view.IsMine) {
+            cursor = GameObject.Instantiate(PlayerCursorPrefab, Vector3.zero, Quaternion.identity);
+            camera = Instantiate(CameraPrefab, transform.position, Quaternion.identity);
+            camera.transform.SetParent(this.gameObject.transform);
+            camera.GetComponent<CameraFollow>().target = transform;
+            camera.GetComponent<CameraFollow>().Follow();
+            cursor.GetComponent<PlayerCursor>().player = this;
+            cursor.GetComponent<PlayerCursor>().camera = camera.GetComponent<Camera>();
+        }
     }
 
     void Update()
     {
-        if (weapon != null && Input.GetKeyDown(KeyCode.Mouse0)) {
-            weapon.GetComponent<IWeapon>().Fire(this, transform.position, cursor.transform.position);
+        if (view.IsMine) {
+            if (weapon != null) {
+
+                if (Input.GetKeyDown(KeyCode.Mouse0)) {
+                    weapon.GetComponent<IWeapon>().Fire(this, transform.position, cursor.transform.position);
+                }
+
+                if (Input.GetKeyDown(KeyCode.E)) {
+                    weapon.GetComponent<IWeapon>().DropItem(this, transform.position, cursor.transform.position);
+                }
+
+            }
+            RegenerateResources();
+            UpdateStatusBars();
         }
-        RegenerateResources();
+
+    }
+
+    void UpdateStatusBars() {
+        HealthBar.GetComponent<Transform>().localScale = new Vector3(Health/100,1,1);
+        ManaBar.GetComponent<Transform>().localScale = new Vector3(Mana/100,1,1);
+        StaminaBar.GetComponent<Transform>().localScale = new Vector3(Stamina/100,1,1);
     }
 
     void OnCollisionEnter2D(Collision2D col) {
+
+        // Weapon pickup
         if ( weapon == null && col.gameObject.tag == "Weapon") {
             weapon = col.gameObject;
-            weapon.transform.SetParent(transform);
-            weapon.transform.position = transform.position + Vector3.back;
+            weapon.transform.position = RightHandPrefab.transform.position + Vector3.back;
+            weapon.transform.SetParent(RightHandPrefab.transform);
             weapon.GetComponent<Collider2D>().enabled = false;
             weapon.GetComponent<Rigidbody2D>().isKinematic = true;
+            weapon.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            Debug.Log($"Picked up weapon: {weapon}");
         }
     }
 

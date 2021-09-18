@@ -28,22 +28,6 @@ public abstract class Weapon : MonoBehaviour
         }
     }
 
-    void Update () {
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            Rank -= 1;
-        }
-        if (Input.GetKeyDown(KeyCode.E)) {
-            Rank += 1;
-        }
-    }
-
-    public void UpgradeRank(Player user) {
-        user.Weapon.GetComponent<Weapon>().Rank += 1;
-    }
-    public void DowngradeRank(Player user) {
-        user.Weapon.GetComponent<Weapon>().Rank -= 1;
-    }
-
     protected void setRankColor(int rank) {
         switch (rank) {
             case 1:

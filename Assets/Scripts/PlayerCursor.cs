@@ -8,6 +8,7 @@ public class PlayerCursor : MonoBehaviour
     Vector3 mouseScreenPos;
     Vector3 mouseWorldPos;
     public Player player;
+    public Camera camera;
 
     void Update()
     {
@@ -16,7 +17,7 @@ public class PlayerCursor : MonoBehaviour
 
     void MoveCursor() {
         mouseScreenPos = Input.mousePosition;
-        mouseWorldPos = Vector3.Scale(Camera.main.ScreenToWorldPoint(mouseScreenPos), new Vector3(1, 1, 0));
+        mouseWorldPos = Vector3.Scale(camera.ScreenToWorldPoint(mouseScreenPos), new Vector3(1, 1, 0));
         this.transform.position = mouseWorldPos;
     }
 }

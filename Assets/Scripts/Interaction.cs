@@ -85,10 +85,6 @@ public class Interaction : MonoBehaviour
         examineImage.sprite = item.GetComponent<SpriteRenderer>().sprite;
         examineText.text = item.descText;
         examineWindow.SetActive(true);
-
-        
-            
-
     }
     IEnumerator Delay()
     {

@@ -6,9 +6,17 @@ using Photon.Pun;
 public class PlayerSpawner : MonoBehaviour
 {
     public GameObject PlayerPrefab;
+    [SerializeField] GameObject[] spawners;
+    GameObject randomSpawner;
 
     void Start () {
-        PhotonNetwork.Instantiate(PlayerPrefab.name, Vector3.zero, Quaternion.identity);
+        spawners = GameObject.FindGameObjectsWithTag("Spawner");
+        
+        if (spawners.Length > 0) {
+            do {
+                randomSpawner = spawners[new System.Random().Next(spawners.Length)];
+            } while (randomSpawner.GetComponent<Spawner>().isOccupied);
+            PhotonNetwork.Instantiate(PlayerPrefab.name, randomSpawner.transform.position, Quaternion.identity);
+        }
     }
-
 }

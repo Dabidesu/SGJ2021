@@ -13,6 +13,7 @@ public interface IWeapon
     float BaseDamage {get;}
     float Damage {get;}
     public void Fire(Player user, Vector3 userPosition, Vector3 targetPosition);
+    public void DropItem(Player user, Vector3 userPosition, Vector3 targetPosition);
 }
 
 public interface IRangedWeapon : IWeapon

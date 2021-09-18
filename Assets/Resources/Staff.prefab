@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 6527694439519102634}
   - component: {fileID: -5122882655919358681}
   - component: {fileID: 1424602852315108328}
+  - component: {fileID: 8874512561441013377}
   m_Layer: 9
   m_Name: Staff
   m_TagString: Weapon
@@ -81,7 +82,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rank: 1
-  firingOffset: 0.1
   ProjectilePrefab: {fileID: 5735537670753129386, guid: 3593e9f182492614aae1dd7d0d634557, type: 3}
   GemPrefab: {fileID: 9115987285569591333}
 --- !u!61 &6527694439519102635
@@ -151,6 +151,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1424602852315108328}
+  - {fileID: 8874512561441013377}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -187,6 +188,22 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &8874512561441013377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6527694439519102638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 1
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &6579472235527409178
 GameObject:
   m_ObjectHideFlags: 0

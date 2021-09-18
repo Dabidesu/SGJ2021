@@ -5,7 +5,7 @@ using Photon.Pun;
 
 public class Fireball : MonoBehaviourPun
 {
-    public Player User;
+    public int SourceID;
     // public Transform userTransform;
     public float damage;
 
@@ -30,9 +30,9 @@ public class Fireball : MonoBehaviourPun
     void OnTriggerEnter2D (Collider2D col) {
         
         if (col.CompareTag("Player")) {
-            print($"{User.GetComponent<PhotonView>().GetInstanceID()} -> {col.GetComponent<PhotonView>().GetInstanceID()}");
-            if (User.GetComponent<PhotonView>().GetInstanceID() != col.GetComponent<PhotonView>().GetInstanceID()) {
-                col.gameObject.GetComponent<PhotonView>().RPC("takeDamage", RpcTarget.AllBuffered, damage);
+            print($"{SourceID} -> {col.GetComponent<PhotonView>().ViewID}");
+            if (SourceID != col.GetComponent<PhotonView>().ViewID) {
+                col.gameObject.GetComponent<PhotonView>().RPC("takeDamage", RpcTarget.AllBuffered, damage, SourceID);
                 col.gameObject.GetComponent<Player>().Health -= damage;
                 this.GetComponent<PhotonView>().RPC("destroy", RpcTarget.AllBuffered);
             }

@@ -20,9 +20,12 @@ public class Fireball : MonoBehaviour
     }   
 
     void OnTriggerEnter2D (Collider2D col) {
-        Debug.Log("Collide");
+        
+        if (col.CompareTag("Player")) {
+            Debug.Log($"hitid: {col.gameObject.GetComponent<Player>().PlayerID}, sourceid: {User.PlayerID}");
+        }
 
-        if (col.CompareTag("Player") && col.gameObject.GetComponent<Player>() != User) {
+        if (col.CompareTag("Player") && col.gameObject.GetComponent<Player>().PlayerID != User.PlayerID) {
             col.gameObject.GetComponent<Player>().Health -= damage;
             Destroy(this.gameObject);
         } 

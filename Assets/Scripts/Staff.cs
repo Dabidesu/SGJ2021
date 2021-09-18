@@ -30,7 +30,7 @@ public class Staff : Weapon, IRangedWeapon, IMagicWeapon
     }
 
     public void Fire(Player user, Vector3 userPosition, Vector3 targetPosition) {
-        setRankColor(Rank);
+        SetGemColor(Rank);
 
         if (user.Mana >= ManaCost) {
             Vector3 forceVector3d = targetPosition - userPosition;
@@ -65,7 +65,9 @@ public class Staff : Weapon, IRangedWeapon, IMagicWeapon
 
     void SetGemColor(int rank) {
         setRankColor(Rank);
+        print("1");
         GemPrefab.GetComponent<SpriteRenderer>().color = rankColor;
+        print("2");
     }
 
 }

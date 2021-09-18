@@ -16,7 +16,11 @@ public class PlayerSpawner : MonoBehaviour
             do {
                 randomSpawner = spawners[new System.Random().Next(spawners.Length)];
             } while (randomSpawner.GetComponent<Spawner>().isOccupied);
-            PhotonNetwork.Instantiate(PlayerPrefab.name, randomSpawner.transform.position, Quaternion.identity);
+            
+            
+            GameObject player = PhotonNetwork.Instantiate(PlayerPrefab.name, randomSpawner.transform.position, Quaternion.identity);
+            player.GetComponent<Player>().PlayerID = new System.Random().Next(999999);
+
         }
     }
 }

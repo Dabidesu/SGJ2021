@@ -5,6 +5,7 @@ using Photon.Pun;
 
 public class Player : MonoBehaviour, IDamagable<float>
 {
+    public int PlayerID;
     PhotonView view;
     bool isAlive = true;
     [SerializeReference] float health = 100;

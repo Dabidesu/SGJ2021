@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class Player : MonoBehaviour, IDamagable<float>
+public class Player : MonoBehaviourPun, IDamagable<float>
 {
     public int PlayerID;
     PhotonView view;
@@ -104,10 +104,9 @@ public class Player : MonoBehaviour, IDamagable<float>
                 }
 
             }
-            RegenerateResources();
-            UpdateStatusBars();
         }
-
+        RegenerateResources();
+        UpdateStatusBars();
     }
 
     void UpdateStatusBars() {
@@ -126,7 +125,6 @@ public class Player : MonoBehaviour, IDamagable<float>
             weapon.GetComponent<Collider2D>().enabled = false;
             weapon.GetComponent<Rigidbody2D>().isKinematic = true;
             weapon.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            Debug.Log($"Picked up weapon: {weapon}");
         }
     }
 
@@ -148,5 +146,10 @@ public class Player : MonoBehaviour, IDamagable<float>
     void Die(){
         this.isAlive = false;
         Debug.Log("Player Died!");
+    }
+
+    [PunRPC]
+    void takeDamage (float damageAmount) {
+        Health -= damageAmount;
     }
 }

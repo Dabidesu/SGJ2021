@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Staff : Weapon, IRangedWeapon, IMagicWeapon
 {   
@@ -35,8 +36,11 @@ public class Staff : Weapon, IRangedWeapon, IMagicWeapon
         if (user.Mana >= ManaCost) {
             Vector3 forceVector3d = targetPosition - userPosition;
             Vector2 forceVector2d = new Vector2(forceVector3d.x, forceVector3d.y);
-            GameObject proj = Instantiate(ProjectilePrefab, GemPrefab.GetComponent<Transform>().position + Vector3.right * firingOffset, Quaternion.identity);
-            proj.GetComponent<Fireball>().userTransform = transform;
+
+            
+            GameObject proj = PhotonNetwork.Instantiate(ProjectilePrefab.name, GemPrefab.GetComponent<Transform>().position, Quaternion.identity);
+            // GameObject proj = Instantiate(ProjectilePrefab, GemPrefab.GetComponent<Transform>().position + Vector3.right * firingOffset, Quaternion.identity);
+            // proj.GetComponent<Fireball>().userTransform = transform;
             proj.GetComponent<Fireball>().damage = Damage;
             proj.GetComponent<Fireball>().User = user;
             proj.GetComponent<SpriteRenderer>().color = rankColor;
@@ -65,9 +69,7 @@ public class Staff : Weapon, IRangedWeapon, IMagicWeapon
 
     void SetGemColor(int rank) {
         setRankColor(Rank);
-        print("1");
         GemPrefab.GetComponent<SpriteRenderer>().color = rankColor;
-        print("2");
     }
 
 }

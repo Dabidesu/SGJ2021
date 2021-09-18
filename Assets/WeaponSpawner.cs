@@ -10,6 +10,7 @@ public class WeaponSpawner : MonoBehaviour
     void Start()
     {
         SpawnWeapon();
+        print("AAA");
     }
     
     void OnTriggerExit2D (Collider2D col) {

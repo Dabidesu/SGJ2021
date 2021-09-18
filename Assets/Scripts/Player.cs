@@ -68,9 +68,9 @@ public class Player : MonoBehaviour, IDamagable<float>
         get {return staminaRegen;}
     }
 
-    public GameObject HealthBar;
-    public GameObject ManaBar;
-    public GameObject StaminaBar;
+    // public GameObject HealthBar;
+    // public GameObject ManaBar;
+    // public GameObject StaminaBar;
     public GameObject WallChecker;
     public GameObject CameraPrefab;
     GameObject camera;
@@ -102,18 +102,16 @@ public class Player : MonoBehaviour, IDamagable<float>
         if (isAlive) {
             RegenerateResources();
         }
-        UpdateStatusBars();
+        // UpdateStatusBars();
     }
 
-    void UpdateStatusBars() {
-        HealthBar.GetComponent<Transform>().localScale = new Vector3(Health/100,1,1);
-        ManaBar.GetComponent<Transform>().localScale = new Vector3(Mana/100,1,1);
-        StaminaBar.GetComponent<Transform>().localScale = new Vector3(Stamina/100,1,1);
-    }
+    // void UpdateStatusBars() {
+    //     HealthBar.GetComponent<Transform>().localScale = new Vector3(Health/100,1,1);
+    //     ManaBar.GetComponent<Transform>().localScale = new Vector3(Mana/100,1,1);
+    //     StaminaBar.GetComponent<Transform>().localScale = new Vector3(Stamina/100,1,1);
+    // }
 
     void OnCollisionEnter2D(Collision2D col) {
-
-        // Weapon pickup
         if ( weapon == null && col.gameObject.tag == "Weapon") {
             weapon = col.gameObject;
             weapon.transform.position = RightHandPrefab.transform.position + Vector3.back;

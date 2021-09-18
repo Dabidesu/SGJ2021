@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Staff : Weapon, IRangedWeapon, IMagicWeapon
 {   
-    [SerializeField] float firingOffset = 0.1f;
     Color staffColor;
     Color fireballColor;
     public GameObject ProjectilePrefab;

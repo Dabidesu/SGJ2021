@@ -24,10 +24,19 @@ public class Fireball : MonoBehaviourPun
         // }
     }   
 
+    // void OnCollisionEnter2D (Collision2D col) {
+        
+    //     if (col.gameObject.CompareTag("Enemy")) {
+    //         Debug.Log("HIT");
+    //         col.gameObject.GetComponent<IDamagable<float>>().Damage(damage);
+    //     }
+    // }
+
     void OnTriggerEnter2D (Collider2D col) {
         
-        if (col.CompareTag("Enemy")) {
-
+        if (col.gameObject.CompareTag("Enemy")) {
+            Debug.Log("HIT");
+            col.gameObject.GetComponent<IDamagable<float>>().Damage(damage);
         }
     }
 

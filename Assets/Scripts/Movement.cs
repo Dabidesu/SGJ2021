@@ -39,13 +39,14 @@ public class Movement : MonoBehaviour
     private bool isGrabbing;
 
 
-    //private Animator animatorzxc;
+    //Animator Component
+    private Animator anim;
 
     Rigidbody2D rb;
 
     void Start()
     {
-        //animatorzxc = gameObject.GetComponent<Animator>();
+        anim = gameObject.GetComponent<Animator>();
     }
 
     void Awake()
@@ -57,14 +58,14 @@ public class Movement : MonoBehaviour
     void Update()
     {
                 horizontalValue = Input.GetAxisRaw("Horizontal");
-                //animatorzxc.SetBool("isWalking", false);
-
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isRunning", false);
                 //Jump
                 jumpMultiplier = 2.0f;
                 jumpForce = 10f * jumpMultiplier;
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    if (GameObject.Find("Player").GetComponent<GroundChecker>().isGrounded)
+                    if (gameObject.GetComponent<GroundChecker>().isGrounded)
                     {
                         Jump();
                     }
@@ -73,9 +74,9 @@ public class Movement : MonoBehaviour
                 //Walk
                 if (horizontalValue != 0 && !Input.GetKey(KeyCode.LeftShift))
                 {
-                    //animatorzxc.SetBool("isWalking", true);
-                    if (!(GameObject.Find("Player").GetComponent<GroundChecker>().isGrounded))
-                    {
+                    anim.SetBool("isWalking", true);
+                    if (!gameObject.GetComponent<GroundChecker>().isGrounded)
+            {
                         //Debug.Log("xd");
                     }
                     else
@@ -87,7 +88,7 @@ public class Movement : MonoBehaviour
                 //Sprint
                 else
                 {
-                    if(!(GameObject.Find("Player").GetComponent<GroundChecker>().isGrounded))
+                    if(!gameObject.GetComponent<GroundChecker>().isGrounded)
                     {
                         //Debug.Log("xd");
                     }
@@ -95,8 +96,8 @@ public class Movement : MonoBehaviour
                     {
                         runningSpeed = speed * 2f;
                         Sprint();
-                        //animatorzxc.SetBool("isRunning", true);
-                        //animatorzxc.SetBool("isWalking", false);
+                        anim.SetBool("isRunning", true);
+                        anim.SetBool("isWalking", false);
                     }
 
                 }
@@ -106,7 +107,7 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!(GameObject.Find("Player").GetComponent<GroundChecker>().isGrounded))
+        if (!gameObject.GetComponent<GroundChecker>().isGrounded)
         {
             //Debug.Log("xd");
         }
@@ -168,7 +169,7 @@ public class Movement : MonoBehaviour
 
     void WallCheck()
     {
-        if(Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, wallLayer) && Mathf.Abs(horizontalValue) > 0 && /*rb.velocity.y < 0 &&*/ !(GameObject.Find("Player").GetComponent<GroundChecker>().isGrounded))
+        if(Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, wallLayer) && Mathf.Abs(horizontalValue) > 0 && /*rb.velocity.y < 0 &&*/ !gameObject.GetComponent<GroundChecker>().isGrounded)
         {
             Debug.Log(isGrabbing);
             Vector2 v = rb.velocity;

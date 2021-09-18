@@ -131,10 +131,10 @@ public class Movement : MonoBehaviour
                 rb.velocity = Vector2.zero;
                 dashDirection = (int)horizontalValue;
                 anim.SetBool("isMidAir", true);
-                if(dashCounter < 3)
-                {
-                    Debug.Log(dashCounter + 1);
-                }
+                // if(dashCounter < 3)
+                // {
+                //     Debug.Log(dashCounter + 1);
+                // }
             }
             
             if(isDashing)

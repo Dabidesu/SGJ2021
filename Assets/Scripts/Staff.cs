@@ -5,7 +5,6 @@ using Photon.Pun;
 
 public class Staff : Weapon, IRangedWeapon, IMagicWeapon
 {   
-    [SerializeField] float firingOffset = 0.1f;
     Color staffColor;
     Color fireballColor;
     public GameObject ProjectilePrefab;
@@ -39,10 +38,8 @@ public class Staff : Weapon, IRangedWeapon, IMagicWeapon
 
             
             GameObject proj = PhotonNetwork.Instantiate(ProjectilePrefab.name, GemPrefab.GetComponent<Transform>().position, Quaternion.identity);
-            // GameObject proj = Instantiate(ProjectilePrefab, GemPrefab.GetComponent<Transform>().position + Vector3.right * firingOffset, Quaternion.identity);
-            // proj.GetComponent<Fireball>().userTransform = transform;
             proj.GetComponent<Fireball>().damage = Damage;
-            proj.GetComponent<Fireball>().User = user;
+            proj.GetComponent<Fireball>().SourceID = user.PlayerID;
             proj.GetComponent<SpriteRenderer>().color = rankColor;
             proj.GetComponent<Rigidbody2D>().velocity = forceVector2d.normalized * ProjectileSpeed;
 

@@ -28,6 +28,7 @@ public class Player : MonoBehaviourPun, IDamagable<float>
         set {
             if (value < 0) {
                 health = 0;
+                isAlive = false;
             } else if (value > 100) {
                 health = 100;
             } else {
@@ -80,6 +81,7 @@ public class Player : MonoBehaviourPun, IDamagable<float>
     {
         view = GetComponent<PhotonView>();
         if (view.IsMine) {
+            PlayerID = view.ViewID;
             cursor = GameObject.Instantiate(PlayerCursorPrefab, Vector3.zero, Quaternion.identity);
             camera = Instantiate(CameraPrefab, transform.position, Quaternion.identity);
             camera.transform.SetParent(this.gameObject.transform);
@@ -105,7 +107,9 @@ public class Player : MonoBehaviourPun, IDamagable<float>
 
             }
         }
-        RegenerateResources();
+        if (isAlive) {
+            RegenerateResources();
+        }
         UpdateStatusBars();
     }
 
@@ -149,7 +153,11 @@ public class Player : MonoBehaviourPun, IDamagable<float>
     }
 
     [PunRPC]
-    void takeDamage (float damageAmount) {
+    void takeDamage (float damageAmount, int SourceID) {
         Health -= damageAmount;
+        print($"{SourceID} dealt {damageAmount} damage to {PlayerID}");
+        if (!isAlive) {
+            print($"{SourceID} killed {PlayerID}");
+        }
     }
 }

@@ -78,7 +78,6 @@ public class Player : MonoBehaviour, IDamagable<float>
     void Start()
     {
         cursor = GameObject.Instantiate(PlayerCursorPrefab, Vector3.zero, Quaternion.identity);
-        camera = Instantiate(CameraPrefab, transform.position, Quaternion.identity);
         camera.transform.SetParent(this.gameObject.transform);
         camera.GetComponent<CameraFollow>().target = transform;
         camera.GetComponent<CameraFollow>().Follow();

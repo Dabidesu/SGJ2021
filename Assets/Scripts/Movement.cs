@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 
 public class Movement : MonoBehaviour
 {
-
+    PhotonView view;
     //Serialized Variables
     [SerializeField] private LayerMask platformLayerMask;
     
@@ -37,6 +38,7 @@ public class Movement : MonoBehaviour
     private bool isGrounded;
     private bool isRunning;
     private bool isGrabbing;
+    
 
 
     //Animator Component
@@ -46,7 +48,8 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
-        anim = gameObject.GetComponent<Animator>();
+        //animatorzxc = gameObject.GetComponent<Animator>();
+        view = GetComponent<PhotonView>();
     }
 
     void Awake()
@@ -56,23 +59,28 @@ public class Movement : MonoBehaviour
     }
 
     void Update()
-    {
-                horizontalValue = Input.GetAxisRaw("Horizontal");
-                anim.SetBool("isWalking", false);
-                anim.SetBool("isRunning", false);
-                //Jump
-                jumpMultiplier = 2.0f;
-                jumpForce = 10f * jumpMultiplier;
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    if (gameObject.GetComponent<GroundChecker>().isGrounded)
-                    {
-                        Jump();
-                    }
-                }
+    {   
+        // Put all movement shit in this if block
+        if (view.IsMine) {
+            horizontalValue = Input.GetAxisRaw("Horizontal");
+            //animatorzxc.SetBool("isWalking", false);
 
-                //Walk
-                if (horizontalValue != 0 && !Input.GetKey(KeyCode.LeftShift))
+            //Jump
+            jumpMultiplier = 2.0f;
+            jumpForce = 10f * jumpMultiplier;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {   
+                if (GameObject.Find("Player").GetComponent<GroundChecker>().isGrounded)
+                {
+                    Jump();
+                }
+            }
+
+            //Walk
+            if (horizontalValue != 0 && !Input.GetKey(KeyCode.LeftShift))
+            {
+                //animatorzxc.SetBool("isWalking", true);
+                if (!(GameObject.Find("Player").GetComponent<GroundChecker>().isGrounded))
                 {
                     anim.SetBool("isWalking", true);
                     if (!gameObject.GetComponent<GroundChecker>().isGrounded)
@@ -85,7 +93,6 @@ public class Movement : MonoBehaviour
                     }
                     isRunning = false;
                 }
-                //Sprint
                 else
                 {
                     if(!gameObject.GetComponent<GroundChecker>().isGrounded)
@@ -101,8 +108,27 @@ public class Movement : MonoBehaviour
                     }
 
                 }
+                isRunning = false;
+            }
+            //Sprint
+            else
+            {
+                if(!gameObject.GetComponent<GroundChecker>().isGrounded)
+                {
+                    //Debug.Log("xd");
+                }
+                else
+                {
+                    runningSpeed = speed * 2f;
+                    Sprint();
+                    //animatorzxc.SetBool("isRunning", true);
+                    //animatorzxc.SetBool("isWalking", false);
+                }
 
-        WallCheck();
+            }
+
+            WallCheck();
+        }
     }
 
     void FixedUpdate()

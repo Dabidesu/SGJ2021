@@ -147,15 +147,15 @@ public class Movement : MonoBehaviour
                     if (currDashTimer <= 0)
                     {
                         isDashing = false;
-                        anim.SetBool("isMidAir", true);
                         dashCounter++;
                     }
 
                 }
                 else if(dashCounter == 3)
                 {
-                    anim.SetBool("isStoppedMidAir", true);
+                    
                     hint.SetActive(true);
+                    anim.SetBool("isStoppedMidAir", true);
                     StartCoroutine(DashCoolDown());
                 }
                 //Debug.Log("Cooldown finished.");

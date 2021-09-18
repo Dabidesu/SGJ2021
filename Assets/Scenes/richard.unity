@@ -330,6 +330,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4375473061936821040, guid: 36fcb5987073d0e47a1ed72ebef6adb1, type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6527694439519102633, guid: 36fcb5987073d0e47a1ed72ebef6adb1, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1213,6 +1217,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4375473061936821040, guid: 36fcb5987073d0e47a1ed72ebef6adb1, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6527694439519102633, guid: 36fcb5987073d0e47a1ed72ebef6adb1, type: 3}
       propertyPath: m_RootOrder
       value: 2

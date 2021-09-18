@@ -119,10 +119,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 648bdd84fd8023d449ce1b02e359aed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+  SourceID: 0
+  damage: 5
+=======
   User: {fileID: 0}
   userTransform: {fileID: 0}
   damage: 0
   DespawnDistance: 30
+>>>>>>> refs/remotes/main/main
 --- !u!58 &8232042444946323805
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -19,11 +19,14 @@ public class Staff : Weapon, IRangedWeapon, IMagicWeapon
         }
     }
 
+    public GameObject GemPrefab;
+
     void Start () {
         projectileSpeed = 15f;
         Rank = 1;
         baseDamage = 5f;
         baseManaCost = 5f;
+        SetGemColor(Rank);
     }
 
     public void Fire(Player user, Vector3 userPosition, Vector3 targetPosition) {
@@ -32,7 +35,7 @@ public class Staff : Weapon, IRangedWeapon, IMagicWeapon
         if (user.Mana >= ManaCost) {
             Vector3 forceVector3d = targetPosition - userPosition;
             Vector2 forceVector2d = new Vector2(forceVector3d.x, forceVector3d.y);
-            GameObject proj = Instantiate(ProjectilePrefab, user.WallChecker.transform.position + Vector3.right * firingOffset, Quaternion.identity);
+            GameObject proj = Instantiate(ProjectilePrefab, GemPrefab.GetComponent<Transform>().position + Vector3.right * firingOffset, Quaternion.identity);
             proj.GetComponent<Fireball>().userTransform = transform;
             proj.GetComponent<Fireball>().damage = Damage;
             proj.GetComponent<Fireball>().User = user;
@@ -50,7 +53,6 @@ public class Staff : Weapon, IRangedWeapon, IMagicWeapon
         weapon.transform.parent = null;
         weapon.GetComponent<Rigidbody2D>().velocity = forceVector2d.normalized * ProjectileSpeed * 0.1f;
         StartCoroutine(DropWeapon(1f, weapon));
-        
         user.Weapon = null;
     }
 
@@ -60,4 +62,10 @@ public class Staff : Weapon, IRangedWeapon, IMagicWeapon
         yield return new WaitForSecondsRealtime(5f);
         weapon.GetComponent<Rigidbody2D>().isKinematic = false;
     }
+
+    void SetGemColor(int rank) {
+        setRankColor(Rank);
+        GemPrefab.GetComponent<SpriteRenderer>().color = rankColor;
+    }
+
 }

@@ -2493,18 +2493,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3518362819235420411, guid: 86d6e98b4dc019f4eb4faae69b075d9c, type: 3}
-      propertyPath: Camera
-      value: 
-      objectReference: {fileID: 8485826231100676593, guid: 231db844a1a2d244a87ef8b10f04432a, type: 3}
-    - target: {fileID: 3518362819235420411, guid: 86d6e98b4dc019f4eb4faae69b075d9c, type: 3}
-      propertyPath: CameraPrefab
-      value: 
-      objectReference: {fileID: 8485826231100676593, guid: 231db844a1a2d244a87ef8b10f04432a, type: 3}
-    - target: {fileID: 8666839319271118088, guid: 86d6e98b4dc019f4eb4faae69b075d9c, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8666839319271118088, guid: 86d6e98b4dc019f4eb4faae69b075d9c, type: 3}
       propertyPath: examineText
       value: 
@@ -2568,10 +2556,6 @@ PrefabInstance:
     - target: {fileID: 8666839319271118133, guid: 86d6e98b4dc019f4eb4faae69b075d9c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8666839319271118134, guid: 86d6e98b4dc019f4eb4faae69b075d9c, type: 3}
-      propertyPath: platformLayerMask.m_Bits
-      value: 896
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86d6e98b4dc019f4eb4faae69b075d9c, type: 3}

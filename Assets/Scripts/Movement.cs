@@ -19,7 +19,7 @@ public class Movement : MonoBehaviour
 
     public float startDashTimer;
     public float dashCooldown = 3f;
-
+    public GameObject hint;
 
     public bool facingRight = true;
 
@@ -155,9 +155,11 @@ public class Movement : MonoBehaviour
                 else if(dashCounter == 3)
                 {
                     anim.SetBool("isStoppedMidAir", true);
-                    StartCoroutine(DashCoolDown()); 
+                    hint.SetActive(true);
+                    StartCoroutine(DashCoolDown());
                 }
-                Debug.Log("Cooldown finished.");
+                //Debug.Log("Cooldown finished.");
+                //hint.SetActive(false);
 
             }
             else

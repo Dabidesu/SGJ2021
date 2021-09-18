@@ -166,7 +166,7 @@ public class Movement : MonoBehaviour
             else
             {
                 anim.SetBool("isMidAir", false);
-                anim.SetBool("isStoppedMidAir", false);
+                //anim.SetBool("isStoppedMidAir", false);
             }
 
         }

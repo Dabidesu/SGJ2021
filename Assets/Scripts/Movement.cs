@@ -185,19 +185,28 @@ public class Movement : MonoBehaviour
             v.y = -slideFactor;
             rb.velocity = v;
             isGrabbing = true;
+            anim.SetBool("isClimbing", false);
             if (isGrabbing)
             {
                 rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, jumpForce);
                 //Revenant Climb
                 if (isGrabbing)
+                {
                     rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, jumpForce);
 
-                //Climb Animation
+                    //Climb Animation
+                    anim.SetBool("isClimbing", true);
+
+                }
+
+
+
+
             }
         }
         else
         {
-
+            anim.SetBool("isClimbing", false);
         }
     }
 }

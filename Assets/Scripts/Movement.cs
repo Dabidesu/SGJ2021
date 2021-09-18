@@ -41,16 +41,12 @@ public class Movement : MonoBehaviour
     private float xVal;
     private float currDashTimer;
     private float dashDirection;
-
-    private int dashCounter = 3;
-    private int testCount = 3;
+    private int dashCounter;
 
     private bool isGrounded;
     private bool isRunning;
     private bool isGrabbing;
     private bool isDashing;
-    private bool canDash;
-    private bool onCoolDown;
 
 
     
@@ -120,8 +116,7 @@ public class Movement : MonoBehaviour
                     anim.SetBool("isRunning", true);
                     runningSpeed = speed * 2f;
                     Sprint();
-                    
-                    
+
                 }
             }
 
@@ -135,38 +130,40 @@ public class Movement : MonoBehaviour
                 currDashTimer = startDashTimer;
                 rb.velocity = Vector2.zero;
                 dashDirection = (int)horizontalValue;
-                
+                anim.SetBool("isMidAir", true);
+                if(dashCounter < 3)
+                {
+                    Debug.Log(dashCounter + 1);
+                }
             }
             
             if(isDashing)
             {
-                
-                if(dashCounter > 0)
+                if(dashCounter < 3)
                 {
                     rb.velocity = transform.right * dashDirection * dashForce;
                     currDashTimer -= Time.deltaTime;
-                    Debug.Log(dashCounter);
-                    dashCounter--;
                     
                     if (currDashTimer <= 0)
                     {
                         isDashing = false;
-
+                        anim.SetBool("isMidAir", true);
+                        dashCounter++;
                     }
 
-                    if(dashCounter == 0)
-                    {
-                        canDash = false;
-                    }
                 }
-                else if(!canDash)
+                else if(dashCounter == 3)
                 {
-                    CoolDownStart();
-                    canDash = true;
+                    anim.SetBool("isStoppedMidAir", true);
+                    StartCoroutine(DashCoolDown()); 
                 }
-                
-                
+                Debug.Log("Cooldown finished.");
 
+            }
+            else
+            {
+                anim.SetBool("isMidAir", false);
+                anim.SetBool("isStoppedMidAir", false);
             }
 
         }
@@ -264,21 +261,12 @@ public class Movement : MonoBehaviour
         }
     }
 
-    void CoolDownStart()
+    IEnumerator DashCoolDown()
     {
-        StartCoroutine(CooldownCoroutine());
-    }
-    IEnumerator CooldownCoroutine()
-    {
-        onCoolDown = true;
-        //Debug.Log(dashCooldown);
-        yield return new WaitForSeconds(dashCooldown);
-        onCoolDown = false;
-    }
-
-    public void decCounter()
-    {
-        dashCounter--;
+        anim.SetBool("isStoppedMidAir", false);
+        anim.SetBool("isMidAir", false);
+        yield return new WaitForSeconds(3f);
+        dashCounter -= dashCounter;
     }
 }
 

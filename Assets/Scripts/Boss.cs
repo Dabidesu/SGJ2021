@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour, IDamagable<float>
 {
+    [SerializeField] AudioClip[] audioClips;
+    [SerializeField] AudioSource audioSource;
 
     [SerializeField] ParticleSystem ps;
     [SerializeField] bool isAlive;
@@ -32,6 +34,10 @@ public class Boss : MonoBehaviour, IDamagable<float>
             else if (value >= MaxHealth) { health = MaxHealth; }
             else { health = value; }
         }
+    }
+
+    void Awake() {
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -79,6 +85,8 @@ public class Boss : MonoBehaviour, IDamagable<float>
         leftHandCollider.enabled = true;
         yield return new WaitForSecondsRealtime(attackWindup);
         ps.Play();
+        AudioClip randomClip = audioClips[new System.Random().Next(audioClips.Length)];
+        audioSource.PlayOneShot(randomClip);
         anim.SetBool("Charging", false);
         if (playerWithinRange) {
             player.GetComponent<Player>().Damage(30);

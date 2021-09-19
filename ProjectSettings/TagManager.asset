@@ -9,6 +9,8 @@ TagManager:
   - Spawner
   - StaffGem
   - Enemy
+  - Bullet
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -51,4 +53,13 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1495168101
+    locked: 0
+  - name: Tapal
+    uniqueID: 1940297683
+    locked: 0
+  - name: Background
+    uniqueID: 443812567
+    locked: 0
+  - name: Wall
+    uniqueID: 1663992037
     locked: 0

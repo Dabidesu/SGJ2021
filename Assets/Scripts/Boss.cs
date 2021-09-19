@@ -114,5 +114,6 @@ public class Boss : MonoBehaviour, IDamagable<float>
         foreach (SpriteRenderer sprite in sprites) {
             sprite.enabled = false;
         }
+        Application.Quit();
     }
 }

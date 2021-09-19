@@ -18,6 +18,6 @@ public class PlayAGain : MonoBehaviour
     }
 
     public void PlayAgain() {
-        SceneManager.LoadScene("TheOnlyLevel");
+        SceneManager.LoadScene("BossTest");
     }
 }

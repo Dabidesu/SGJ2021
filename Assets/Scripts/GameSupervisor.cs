@@ -10,6 +10,6 @@ public class GameSupervisor : MonoBehaviour
         print("Start");
     }
     public void StartGame() {
-        SceneManager.LoadScene("TheOnlyLevel");
+        SceneManager.LoadScene("BossTest");
     }
 }

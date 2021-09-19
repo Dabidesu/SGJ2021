@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, IDamagable<float>
 {
@@ -139,6 +140,7 @@ public class Player : MonoBehaviour, IDamagable<float>
     void Die(){
         this.isAlive = false;
         Debug.Log("Player Died!");
+        SceneManager.LoadScene("Lose");
     }
 
 }

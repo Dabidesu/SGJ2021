@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: 88a0aef5a2084ff4c9ef50d962c4411c
+guid: c9205a8bd0d5a2a40a8ee2e84ae83fb5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8371519423036277817
-    second: Jumppad_0
+      213: -6871687453725449047
+    second: Wind-End_0
+  - first:
+      213: 7664368218698873455
+    second: Wind-End_1
+  - first:
+      213: 2695186340371820102
+    second: Wind-End_2
+  - first:
+      213: -2808792364951189851
+    second: Wind-End_3
+  - first:
+      213: -827330945861659450
+    second: Wind-End_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -49,7 +61,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 128
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -69,7 +81,7 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -81,7 +93,7 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -94,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Jumppad_0
+      name: Wind-End_0
       rect:
         serializedVersion: 2
-        x: 40
+        x: 0
         y: 0
-        width: 304
-        height: 76
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -108,8 +120,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7cbb3af507362db80800000000000000
-      internalID: -8371519423036277817
+      spriteID: 9a4af292bacd2a0a0800000000000000
+      internalID: -6871687453725449047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind-End_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6af65f894e4d5a60800000000000000
+      internalID: 7664368218698873455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind-End_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64ee85562b9376520800000000000000
+      internalID: 2695186340371820102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind-End_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a64147c93a2509d0800000000000000
+      internalID: -2808792364951189851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind-End_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c45a3c53eab484f0800000000000000
+      internalID: -827330945861659450
       vertices: []
       indices: 
       edges: []

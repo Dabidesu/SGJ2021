@@ -9,6 +9,7 @@ TagManager:
   - Spawner
   - StaffGem
   - Enemy
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -45,6 +46,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Tapal
+    uniqueID: 389151809
     locked: 0
   - name: Platform
     uniqueID: 171992553

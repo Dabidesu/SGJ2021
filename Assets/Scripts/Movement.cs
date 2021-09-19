@@ -69,7 +69,6 @@ public class Movement : MonoBehaviour
         anim.SetBool("isWalking", false);
         anim.SetBool("isRunning", false);
         //Jump
-        jumpMultiplier = 2.0f;
         jumpForce = 10f * jumpMultiplier;
         if (Input.GetKeyDown(KeyCode.Space))
         {

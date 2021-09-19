@@ -35,7 +35,6 @@ public class Fireball : MonoBehaviourPun
     void OnTriggerEnter2D (Collider2D col) {
         
         if (col.gameObject.CompareTag("Enemy")) {
-            Debug.Log("HIT");
             col.gameObject.GetComponent<IDamagable<float>>().Damage(damage);
         }
     }

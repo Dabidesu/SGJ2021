@@ -7610,7 +7610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff07e9126090f0b4aa6687af2f00e383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformCollider: {fileID: 0}
+  platformCollider: {fileID: 568062970}
   playerCollider: {fileID: 1058589800}
 --- !u!70 &1058589800 stripped
 CapsuleCollider2D:

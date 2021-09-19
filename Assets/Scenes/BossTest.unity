@@ -10965,6 +10965,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 2119564954395486819, guid: b6c132b015e3ce748943b5d8cfe1b3ef, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 2659704063657236280, guid: b6c132b015e3ce748943b5d8cfe1b3ef, type: 3}
       propertyPath: m_TagString
       value: Enemy
@@ -11004,6 +11008,10 @@ PrefabInstance:
     - target: {fileID: 5089967267370607506, guid: b6c132b015e3ce748943b5d8cfe1b3ef, type: 3}
       propertyPath: attackWindup
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5757079808996746887, guid: b6c132b015e3ce748943b5d8cfe1b3ef, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.06
       objectReference: {fileID: 0}
     - target: {fileID: 5798164504224302764, guid: b6c132b015e3ce748943b5d8cfe1b3ef, type: 3}
       propertyPath: m_Size.x

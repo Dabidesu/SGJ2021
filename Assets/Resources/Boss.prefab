@@ -76,7 +76,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -161,7 +161,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -344,10 +344,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a78f545e79b434999ba04af603049e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ps: {fileID: 0}
+  isAlive: 0
+  MaxHealth: 0
   health: 100
   moveSpeed: 5
   attackWindup: 5
   playerWithinRange: 0
+  attacking: 0
   leftHand: {fileID: 8419161601279018886}
   rightHand: {fileID: 2659704063657236280}
 --- !u!70 &1477488067

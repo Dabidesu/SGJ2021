@@ -1,16 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 
 public class Movement : MonoBehaviour
 {
-    PhotonView view;
     //Serialized Variables
-    [Header("Platform Layer Mask")]
     [SerializeField] private LayerMask platformLayerMask;
 
-    [Header("Movement")]
     public float speed;
     public float runningSpeed;
     public float jumpForce;
@@ -19,12 +15,11 @@ public class Movement : MonoBehaviour
     public float wallJumpTime = 0.2f;
 
     public float startDashTimer;
-    public float dashCooldown;
-    public float slideFactor = 0.2f;
-
-    [Header("Object Reference")]
+    public float dashCooldown = 3f;
     public GameObject hint;
-    
+
+    public bool facingRight = true;
+
     //Ground Checker
     public Transform groundCheck;
     public LayerMask groundLayer;
@@ -32,6 +27,10 @@ public class Movement : MonoBehaviour
     //Wall Checker
     public Transform wallCheck;
     public LayerMask wallLayer;
+    const float wallCheckRadius = 0.2f;
+    [SerializeField] float slideFactor = 0.2f;
+
+    private BoxCollider2D boxCollider2d;
 
     //Non-Serialized Variables
     private float moveInput;
@@ -39,18 +38,15 @@ public class Movement : MonoBehaviour
     private float xVal;
     private float currDashTimer;
     private float dashDirection;
-    const float wallCheckRadius = 0.2f;
     private int dashCounter;
 
-    [Header("Debug")]
-    public bool isGrounded;
-    public bool isRunning;
-    public bool isGrabbing;
-    public bool isDashing;
-    public bool facingRight = true;
+    private bool isGrounded;
+    private bool isRunning;
+    private bool isGrabbing;
+    private bool isDashing;
 
-    private BoxCollider2D boxCollider2d;
 
+    
     //Animator Component
     private Animator anim;
 
@@ -59,7 +55,6 @@ public class Movement : MonoBehaviour
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
-        view = GetComponent<PhotonView>();
     }
 
     void Awake()
@@ -70,108 +65,96 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        
-        // Put all movement shit in this if block
-        if (view.IsMine)
+        horizontalValue = Input.GetAxisRaw("Horizontal");
+        anim.SetBool("isWalking", false);
+        anim.SetBool("isRunning", false);
+        //Jump
+        jumpMultiplier = 2.0f;
+        jumpForce = 10f * jumpMultiplier;
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            horizontalValue = Input.GetAxisRaw("Horizontal");
-            anim.SetBool("isWalking", false);
-            anim.SetBool("isRunning", false);
-            //Jump
-            jumpForce = 10f * jumpMultiplier;
-            if (Input.GetKeyDown(KeyCode.W))
+            if (gameObject.GetComponent<GroundChecker>().isGrounded)
             {
-                if (gameObject.GetComponent<GroundChecker>().isGrounded)
-                {
-                    Jump();
-                }
+                Jump();
             }
+        }
 
-            //Walk
-            if (horizontalValue != 0 && !Input.GetKey(KeyCode.LeftShift))
+        //Walk
+        if (horizontalValue != 0 && !Input.GetKey(KeyCode.LeftShift))
+        {
+            //Debug.Log(horizontalValue);
+            if (!gameObject.GetComponent<GroundChecker>().isGrounded)
             {
-                if (!gameObject.GetComponent<GroundChecker>().isGrounded)
-                {
-                    anim.SetBool("isWalking", false);
-                }
-                else
-                {
-                    Walk();
-                    anim.SetBool("isWalking", true);
-                }
-                
-                isRunning = false;
-            }
-            //Sprint
-            else if(horizontalValue != 0 && Input.GetKey(KeyCode.LeftShift))
-            {
-                
-                if (!gameObject.GetComponent<GroundChecker>().isGrounded)
-                {
-
-
-                }
-                else if(gameObject.GetComponent<GroundChecker>().isGrounded)
-                {
-                    anim.SetBool("isRunning", true);
-                    runningSpeed = speed * 2f;
-                    Sprint();
-
-                }
-            }
-
-            //Wall Climb
-            WallCheck();
-            
-            //Dash
-            if(Input.GetKeyDown(KeyCode.Space) && !isGrounded && horizontalValue != 0)
-            {
-                isDashing = true;
-                currDashTimer = startDashTimer;
-                rb.velocity = Vector2.zero;
-                dashDirection = (int)horizontalValue;
-                anim.SetBool("isMidAir", true);
-                if(dashCounter < 3)
-                {
-                    Debug.Log("Dash Counter: " + (dashCounter /*+ 1*/));
-                    dashCounter++;
-                }
-            }
-            
-            if(isDashing)
-            {
-                if(dashCounter < 3)
-                {
-                    rb.velocity = transform.right * dashDirection * dashForce;
-                    currDashTimer -= Time.deltaTime;
-                    
-                    if (currDashTimer <= 0)
-                    {
-                        isDashing = false;
-                    }
-
-                }
-                else if(dashCounter == 3)
-                {
-                    
-                    hint.SetActive(true);
-                    anim.SetBool("isStoppedMidAir", true);
-                    StartCoroutine(DashCoolDown());
-                    isDashing = false;
-                    dashCooldown = dashCooldown + Time.deltaTime;
-                    if (dashCooldown == 3f)
-                    {
-                        Debug.Log("Cooldown Finished");
-                    }
-                }
-
+                anim.SetBool("isWalking", false);
             }
             else
             {
-                anim.SetBool("isMidAir", false);
-                //anim.SetBool("isStoppedMidAir", false);
+                Walk();
+                anim.SetBool("isWalking", true);
             }
 
+            isRunning = false;
+        }
+        //Sprint
+        else if (horizontalValue != 0 && Input.GetKey(KeyCode.LeftShift))
+        {
+
+            if (!gameObject.GetComponent<GroundChecker>().isGrounded)
+            {
+
+
+            }
+            else if (gameObject.GetComponent<GroundChecker>().isGrounded)
+            {
+                anim.SetBool("isRunning", true);
+                runningSpeed = speed * 2f;
+                Sprint();
+
+            }
+        }
+
+        //Wall Climb
+        WallCheck();
+
+        //Dash
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !isGrounded && horizontalValue != 0)
+        {
+            isDashing = true;
+            currDashTimer = startDashTimer;
+            rb.velocity = Vector2.zero;
+            dashDirection = (int)horizontalValue;
+            anim.SetBool("isMidAir", true);
+        }
+
+        if (isDashing)
+        {
+            if (dashCounter < 3)
+            {
+                rb.velocity = transform.right * dashDirection * dashForce;
+                currDashTimer -= Time.deltaTime;
+
+                if (currDashTimer <= 0)
+                {
+                    isDashing = false;
+                    dashCounter++;
+                }
+
+            }
+            else if (dashCounter == 3)
+            {
+
+                hint.SetActive(true);
+                anim.SetBool("isStoppedMidAir", true);
+                StartCoroutine(DashCoolDown());
+            }
+            //Debug.Log("Cooldown finished.");
+            //hint.SetActive(false);
+
+        }
+        else
+        {
+            anim.SetBool("isMidAir", false);
+            anim.SetBool("isStoppedMidAir", false);
         }
     }
 
@@ -179,6 +162,7 @@ public class Movement : MonoBehaviour
     {
         if (!gameObject.GetComponent<GroundChecker>().isGrounded)
         {
+            //Debug.Log("xd");
         }
         else
         {
@@ -239,6 +223,7 @@ public class Movement : MonoBehaviour
     {
         if (Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, wallLayer) && Mathf.Abs(horizontalValue) > 0 && /*rb.velocity.y < 0 &&*/ !gameObject.GetComponent<GroundChecker>().isGrounded)
         {
+            //Debug.Log(isGrabbing);
             Vector2 v = rb.velocity;
             v.y = -slideFactor;
             rb.velocity = v;
@@ -269,10 +254,8 @@ public class Movement : MonoBehaviour
     {
         anim.SetBool("isStoppedMidAir", false);
         anim.SetBool("isMidAir", false);
-        yield return new WaitForSeconds(3);
-        
+        yield return new WaitForSeconds(3f);
         dashCounter -= dashCounter;
-        isDashing = false;
         hint.SetActive(false);
     }
 }

@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 
-public class Player : MonoBehaviourPun, IDamagable<float>
+public class Player : MonoBehaviour, IDamagable<float>
 {
     public int PlayerID;
-    PhotonView view;
     bool isAlive = true;
     [SerializeReference] float health = 100;
     [SerializeField] float mana = 100;
@@ -28,6 +26,7 @@ public class Player : MonoBehaviourPun, IDamagable<float>
         set {
             if (value < 0) {
                 health = 0;
+                isAlive = false;
             } else if (value > 100) {
                 health = 100;
             } else {
@@ -69,55 +68,49 @@ public class Player : MonoBehaviourPun, IDamagable<float>
         get {return staminaRegen;}
     }
 
-    public GameObject HealthBar;
-    public GameObject ManaBar;
-    public GameObject StaminaBar;
+    // public GameObject HealthBar;
+    // public GameObject ManaBar;
+    // public GameObject StaminaBar;
     public GameObject WallChecker;
     public GameObject CameraPrefab;
-    GameObject camera;
 
     void Start()
-    {
-        view = GetComponent<PhotonView>();
-        if (view.IsMine) {
-            cursor = GameObject.Instantiate(PlayerCursorPrefab, Vector3.zero, Quaternion.identity);
-            camera = Instantiate(CameraPrefab, transform.position, Quaternion.identity);
-            camera.transform.SetParent(this.gameObject.transform);
-            camera.GetComponent<CameraFollow>().target = transform;
-            camera.GetComponent<CameraFollow>().Follow();
-            cursor.GetComponent<PlayerCursor>().player = this;
-            cursor.GetComponent<PlayerCursor>().camera = camera.GetComponent<Camera>();
-        }
+    {   
+        cursor = GameObject.Instantiate(PlayerCursorPrefab, Vector3.zero, Quaternion.identity);
+        cursor.GetComponent<PlayerCursor>().player = this;
+        // camera.transform.SetParent(this.gameObject.transform);
+        // camera.GetComponent<CameraFollow>().target = transform;
+        // camera.GetComponent<CameraFollow>().Follow();
+        // cursor.GetComponent<PlayerCursor>().player = this;
+        // cursor.GetComponent<PlayerCursor>().camera = Camera.main;
     }
 
     void Update()
     {
-        if (view.IsMine) {
-            if (weapon != null) {
+        if (weapon != null) {
 
-                if (Input.GetKeyDown(KeyCode.Mouse0)) {
-                    weapon.GetComponent<IWeapon>().Fire(this, transform.position, cursor.transform.position);
-                }
-
-                if (Input.GetKeyDown(KeyCode.E)) {
-                    weapon.GetComponent<IWeapon>().DropItem(this, transform.position, cursor.transform.position);
-                }
-
+            if (Input.GetKeyDown(KeyCode.Mouse0)) {
+                weapon.GetComponent<IWeapon>().Fire(this, transform.position, cursor.transform.position);
             }
+
+            if (Input.GetKeyDown(KeyCode.E)) {
+                weapon.GetComponent<IWeapon>().DropItem(this, transform.position, cursor.transform.position);
+            }
+
         }
-        RegenerateResources();
-        UpdateStatusBars();
+        if (isAlive) {
+            RegenerateResources();
+        }
+        // UpdateStatusBars();
     }
 
-    void UpdateStatusBars() {
-        HealthBar.GetComponent<Transform>().localScale = new Vector3(Health/100,1,1);
-        ManaBar.GetComponent<Transform>().localScale = new Vector3(Mana/100,1,1);
-        StaminaBar.GetComponent<Transform>().localScale = new Vector3(Stamina/100,1,1);
-    }
+    // void UpdateStatusBars() {
+    //     HealthBar.GetComponent<Transform>().localScale = new Vector3(Health/100,1,1);
+    //     ManaBar.GetComponent<Transform>().localScale = new Vector3(Mana/100,1,1);
+    //     StaminaBar.GetComponent<Transform>().localScale = new Vector3(Stamina/100,1,1);
+    // }
 
     void OnCollisionEnter2D(Collision2D col) {
-
-        // Weapon pickup
         if ( weapon == null && col.gameObject.tag == "Weapon") {
             weapon = col.gameObject;
             weapon.transform.position = RightHandPrefab.transform.position + Vector3.back;
@@ -148,8 +141,4 @@ public class Player : MonoBehaviourPun, IDamagable<float>
         Debug.Log("Player Died!");
     }
 
-    [PunRPC]
-    void takeDamage (float damageAmount) {
-        Health -= damageAmount;
-    }
 }

@@ -5,8 +5,6 @@ using Photon.Pun;
 
 public class Fireball : MonoBehaviourPun
 {
-    public Player User;
-    // public Transform userTransform;
     public float damage;
 
     void Start () {
@@ -17,7 +15,6 @@ public class Fireball : MonoBehaviourPun
     IEnumerator DestroyAfter(float secs) {
         yield return new WaitForSecondsRealtime(secs);
         Destroy(this.gameObject);
-        this.GetComponent<PhotonView>().RPC("destroy", RpcTarget.AllBuffered);
     }
 
     void Update()
@@ -27,21 +24,19 @@ public class Fireball : MonoBehaviourPun
         // }
     }   
 
+    // void OnCollisionEnter2D (Collision2D col) {
+        
+    //     if (col.gameObject.CompareTag("Enemy")) {
+    //         Debug.Log("HIT");
+    //         col.gameObject.GetComponent<IDamagable<float>>().Damage(damage);
+    //     }
+    // }
+
     void OnTriggerEnter2D (Collider2D col) {
         
-        if (col.CompareTag("Player")) {
-            print($"{User.GetComponent<PhotonView>().GetInstanceID()} -> {col.GetComponent<PhotonView>().GetInstanceID()}");
-            if (User.GetComponent<PhotonView>().GetInstanceID() != col.GetComponent<PhotonView>().GetInstanceID()) {
-                col.gameObject.GetComponent<PhotonView>().RPC("takeDamage", RpcTarget.AllBuffered, damage);
-                col.gameObject.GetComponent<Player>().Health -= damage;
-                this.GetComponent<PhotonView>().RPC("destroy", RpcTarget.AllBuffered);
-            }
-        } 
-    }
-
-    [PunRPC]
-    public void destroy() {
-        Destroy(this.gameObject);
+        if (col.gameObject.CompareTag("Enemy")) {
+            col.gameObject.GetComponent<IDamagable<float>>().Damage(damage);
+        }
     }
 
 }

@@ -8,7 +8,7 @@ TagManager:
   - Projectile
   - Spawner
   - StaffGem
-  - Platform
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -20,7 +20,7 @@ TagManager:
   - Ground
   - Wall
   - Weapons
-  - 
+  - Enemy
   - 
   - 
   - 

@@ -1,13 +1,7 @@
 fileFormatVersion: 2
 guid: cd84756d811d1a54ab9b654ccccc68fd
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -6461370444499792676
-    second: ShrekCanvas_0
-  - first:
-      213: -8295167213689086735
-    second: ShrekCanvas_1
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
